@@ -23,30 +23,26 @@ from PIL import Image
 #you have to set up output and prediction and label path for this running 
 
 #oseteonecrosis
-LABEL_NAME_DICT =  {0: "Background", 1: "Pelvis", 2: "Femur", 3: "Necrosis"}
+LABEL_NAME_DICT =  {0: "label0", 1: "label1", 2: "label2", 3: "label3"}
 #LABEL_NAME_DICT =  {0: "Foreground", 1: "Background", 2: "Not-classified"}
 
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--work_space_dir",
                         type=str,
-                        default="//scallop/user/kameda/Evaluation/assd_and_dc/work_space/osteonecrosis",
-                        #default="//scallop/user/kameda/Evaluation/assd_and_dc/work_space/PetSeg",
+                        default="//your path",
                         help="Work space directory for this running, ")
     parser.add_argument("--pred_dir",
                         type=str,
-                        default="//scallop/user/kameda/datasets/nnUNet/nnUNet_results/Dataset000_osteonecrosis_fold0/nnUNetTrainer_200epochs__nnUNetPlans__2d/predictions",
-                        #default="//scallop/user/kameda/datasets/PetSeg/datasets/nnUNet_results/Dataset000_PetSeg_all/nnUNetTrainer_400epochs__nnUNetPlans__2d/predictions",
+                        default="//your path",
                         help="prediction directory for this running, ")
     parser.add_argument("--target_dir",
                         type=str,
-                        default= "//scallop/user/kameda/datasets/nnUNet/nnUNet_raw/Femoral_bone/Dataset000_osteonecrosis_fold0/labelsTs",
-                        #default="//scallop/user/kameda/datasets/PetSeg/datasets/nnUNet_raw/Dataset000_PetSeg_all/labelsTs",
+                        default= "//your path",
                         help="label directory for this running, ")
     parser.add_argument("--image_dir",
                         type=str,
-                        default="//scallop/user/kameda/datasets/nnUNet/nnUNet_raw/Femoral_bone/Dataset000_osteonecrosis_fold0/imagesTs",
-                        #default="//scallop/user/kameda/datasets/PetSeg/datasets/nnUNet_raw/Dataset000_PetSeg_all/imagesTs",
+                        default="//your path",
                         help="images directory for this running, ")
     parser.add_argument("--data_size",
                         type=Tuple[int ,int],
@@ -287,11 +283,11 @@ def summary(eval_df,
     eval_df = eval_df.loc[[0, len(eval_df) // 2, len(eval_df) - 1]]
     for prefix, (_, row) in zip(["max", "median", "min"], eval_df.iterrows()):#zip(複数のリストを同時に取得),iterrows():(index,series)を一行ずつ取得
         #image_path = os.path.join(image_dir, f"{row['image_id']}_0000.png")nii.gz
-        image_path = os.path.join(image_dir, f"{row['image_id']}_0000.nii.gz")
+        image_path = os.path.join(image_dir, f"{row['image_id']}_0000.nii.gz")#WIP
         #target_label_path = os.path.join(target_dir, f"{row['image_id']}.png")
-        target_label_path = os.path.join(target_dir, f"{row['image_id']}.nii.gz")
+        target_label_path = os.path.join(target_dir, f"{row['image_id']}.nii.gz")#WIP
         #pred_label_path = os.path.join(pred_dir, f"{row['image_id']}_label.png")
-        pred_label_path = os.path.join(pred_dir, f"{row['image_id']}_label.nii.gz")
+        pred_label_path = os.path.join(pred_dir, f"{row['image_id']}_label.nii.gz")#WIP
 
         eval_save_dir_ = os.path.join(eval_save_dir,f"mean_{eval}")
         os.makedirs(eval_save_dir_, exist_ok=True)      
